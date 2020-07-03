@@ -48,4 +48,21 @@ class Ticket
         SqlRunner.run(sql)
     end
 
+    # Ticket transactions
+
+    def price()
+        sql = "SELECT price FROM films
+        WHERE id = $1"
+        values = [@film_id]
+        return SqlRunner.run(sql, values).first
+    end
+
+    # def confirm_sale()
+    #     sql = "UPDATE customers 
+    #     SET funds -= $1
+    #     WHERE id = $2"
+    #     values = []
+    #     @price 
+    # end
+
 end
