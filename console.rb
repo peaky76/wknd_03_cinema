@@ -25,7 +25,8 @@ ticket_2 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_2.id} 
 ticket_3 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_3.id} )
 ticket_4 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_1.id} )
 ticket_5 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_2.id} )
-tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5]
+ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'film_id' => film_1.id} )
+tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5, ticket_6]
 tickets.each { |ticket| ticket.save() }
 
 binding.pry
