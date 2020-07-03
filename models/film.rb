@@ -11,6 +11,8 @@ class Film
         @price = options['price']
     end
 
+    # CRUD fns
+
     def save()
         sql = "INSERT INTO films (title, price) 
         VALUES ($1, $2)

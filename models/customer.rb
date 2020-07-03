@@ -11,6 +11,8 @@ class Customer
         @funds = options['funds']
     end
 
+    # CRUD fns
+
     def save()
         sql = "INSERT INTO customers (name, funds) 
         VALUES ($1, $2)
@@ -44,6 +46,19 @@ class Customer
     def self.delete_all()
         sql = "DELETE FROM customers"
         SqlRunner.run(sql)
+    end
+
+    # Customer bookings
+
+    def films()
+        sql = "SELECT films.* FROM films
+        INNER JOIN tickets
+        ON tickets.film_id = films.id
+        WHERE tickets.customer_id = $1"
+        values = [@id]
+        film_data = SqlRunner.run(sql, values)
+        films = film_data.map { |film| Film.new(film) }
+        return films
     end
     
 end

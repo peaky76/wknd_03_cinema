@@ -11,6 +11,8 @@ class Ticket
         @film_id = options['film_id'].to_i()
     end
 
+    # CRUD fns
+
     def save()
         sql = "INSERT INTO tickets (customer_id, film_id)
         VALUES ($1, $2)

@@ -9,34 +9,24 @@ Customer.delete_all()
 Film.delete_all()
 
 customer_1 = Customer.new( {'name' => 'Ali', 'funds' => 8000} )
-customer_1.save()
-
-customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 1000000} )
-customer_2.save()
-
-customer_2.funds = 10000
-customer_2.update()
+customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 10000} )
+customer_3 = Customer.new( {'name' => 'Charlie', 'funds' => 6000} )
+customers = [customer_1, customer_2, customer_3]
+customers.each { |customer| customer.save() }
 
 film_1 = Film.new( {'title' => 'The Godmother Part III', 'price' => 900} )
-film_1.save()
-
-film_1.title = 'The Godmother Part II'
-film_1.update()
-
 film_2 = Film.new( {'title' => 'Badfellas', 'price' => 800} )
-film_2.save()
-
 film_3 = Film.new( {'title' => 'The Good, The Bad and The Average-Looking', 'price' => 1200} )
-film_3.save()
+films = [film_1, film_2, film_3]
+films.each { |film| film.save() }
 
-ticket_1 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_3.id} )
-ticket_1.save()
-
-ticket_2 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_2.id} )
-ticket_2.save()
-
-ticket_2.film_id = film_3.id
-ticket_2.update()
+ticket_1 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_1.id} )
+ticket_2 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_2.id} )
+ticket_3 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_3.id} )
+ticket_4 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_1.id} )
+ticket_5 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_2.id} )
+tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5]
+tickets.each { |ticket| ticket.save() }
 
 binding.pry
 nil
