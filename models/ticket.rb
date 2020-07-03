@@ -58,12 +58,12 @@ class Ticket
         return result['price'].to_i()
     end
 
-    # def confirm_sale()
-    #     sql = "UPDATE customers 
-    #     SET funds = $1
-    #     WHERE id = $2"
-    #     values = [funds, @customer_id]
-    #     SqlRunner.run(sql, values)
-    # end
+    def confirm_sale()
+        sql = "UPDATE customers 
+        SET funds = funds - $1
+        WHERE id = $2"
+        values = [self.price(), @customer_id]
+        SqlRunner.run(sql, values)
+    end
 
 end
