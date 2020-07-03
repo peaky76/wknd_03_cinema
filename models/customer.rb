@@ -1,12 +1,23 @@
+require_relative('../db/sql_runner')
+
 class Customer
 
     attr_reader :id
     attr_accessor :name, :funds
 
     def initialize(options)
-        @id = option['id'].to_i() if option['id']
-        @name = option['name']
-        @funds = option['funds']
+        @id = options['id'].to_i() if options['id']
+        @name = options['name']
+        @funds = options['funds']
     end
 
+    def save()
+        sql = "INSERT INTO customers (name, funds) 
+        VALUES ($1, $2)
+        RETURNING id"
+        values = [@name, @funds]
+        result = SqlRunner.run(sql, values)
+        @id = result.first['id'].to_i
+    end
+    
 end
