@@ -24,9 +24,9 @@ class Customer
 
     def update()
         sql = "UPDATE customers
-        SET (name, funds) = ($1, 5)
-        WHERE id = $2"
-        values = [@name, @id]
+        SET (name, funds) = ($1, $2)
+        WHERE id = $3"
+        values = [@name, @funds, @id]
         SqlRunner.run(sql, values)
     end
 
@@ -61,7 +61,13 @@ class Customer
         return films
     end
 
-    # Customer funds
+    def ticket_count()
+        sql = "SELECT COUNT(*) FROM tickets
+        WHERE customer_id = $1"
+        values = [@id]
+        result = SqlRunner.run(sql, values).first()['count']
+        return result
+    end
 
     def ticket_spend()
         films_booked = self.films()
