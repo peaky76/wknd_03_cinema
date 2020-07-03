@@ -18,8 +18,8 @@ class Ticket
         VALUES ($1, $2)
         RETURNING id"
         values = [@customer_id, @film_id]
-        result = SqlRunner.run(sql, values)
-        @id = result.first['id'].to_i()
+        result = SqlRunner.run(sql, values).first()
+        @id = result['id'].to_i()
     end
 
     def update()
@@ -54,15 +54,16 @@ class Ticket
         sql = "SELECT price FROM films
         WHERE id = $1"
         values = [@film_id]
-        return SqlRunner.run(sql, values).first
+        result = SqlRunner.run(sql, values).first()
+        return result['price'].to_i()
     end
 
-    # def confirm_sale()
-    #     sql = "UPDATE customers 
-    #     SET funds -= $1
-    #     WHERE id = $2"
-    #     values = []
-    #     @price 
-    # end
+    def confirm_sale()
+        sql = "UPDATE customers 
+        SET funds = $1
+        WHERE id = $2"
+        values = [5, @customer_id]
+        SqlRunner.run(sql, values)
+    end
 
 end

@@ -24,9 +24,9 @@ class Customer
 
     def update()
         sql = "UPDATE customers
-        SET (name, funds) = ($1, $2)
-        WHERE id = $3"
-        values = [@name, @funds, @id]
+        SET (name, funds) = ($1, 5)
+        WHERE id = $2"
+        values = [@name, @id]
         SqlRunner.run(sql, values)
     end
 

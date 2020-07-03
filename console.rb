@@ -29,5 +29,9 @@ ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'film_id' => film_1.id} 
 tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5, ticket_6]
 tickets.each { |ticket| ticket.save() }
 
+customer_1.update()
+ticket_1.confirm_sale()
+# tickets.each { |ticket| ticket.confirm_sale() }
+
 binding.pry
 nil
