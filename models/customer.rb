@@ -8,7 +8,7 @@ class Customer
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @name = options['name']
-        @funds = options['funds']
+        @funds = options['funds'].to_i()
     end
 
     # CRUD fns
@@ -60,5 +60,12 @@ class Customer
         films = film_data.map { |film| Film.new(film) }
         return films
     end
-    
+
+    # Customer funds
+
+    def ticket_spend()
+        films_booked = self.films()
+        return films_booked.reduce(0) { |total, film| total + film.price }
+    end
+
 end
