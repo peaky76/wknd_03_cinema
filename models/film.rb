@@ -48,7 +48,7 @@ class Film
         SqlRunner.run(sql)
     end
 
-      # Customers booked to see film
+    # Customers booked to see film
 
     def customers()
         sql = "SELECT customers.* FROM customers
@@ -72,5 +72,19 @@ class Film
         result = SqlRunner.run(sql, values).first()['count']
         return result
     end
+
+    # Screenings info
+
+    def screenings()
+        sql = "SELECT * FROM screenings
+        WHERE film_id = $1"
+        values = [@id]
+        screening_data = SqlRunner.run(sql, values)
+        return screening_data.map { |screening| Screening.new(screening) }
+    end
+
+    # def most_popular_screening()
+
+    # end
 
 end
