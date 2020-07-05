@@ -9,24 +9,25 @@ class Customer
         @id = options['id'].to_i() if options['id']
         @name = options['name']
         @funds = options['funds'].to_i()
+        @age = options['age'].to_i()
     end
 
     # CRUD fns
 
     def save()
-        sql = "INSERT INTO customers (name, funds) 
-        VALUES ($1, $2)
+        sql = "INSERT INTO customers (name, funds, age) 
+        VALUES ($1, $2, $3)
         RETURNING id"
-        values = [@name, @funds]
+        values = [@name, @funds, @age]
         result = SqlRunner.run(sql, values)
         @id = result.first['id'].to_i
     end
 
     def update()
         sql = "UPDATE customers
-        SET (name, funds) = ($1, $2)
-        WHERE id = $3"
-        values = [@name, @funds, @id]
+        SET (name, funds, age) = ($1, $2, $3)
+        WHERE id = $4"
+        values = [@name, @funds, @age, @id]
         SqlRunner.run(sql, values)
     end
 

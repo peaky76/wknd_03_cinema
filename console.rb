@@ -12,9 +12,9 @@ Ticket.delete_all()
 Customer.delete_all()
 Film.delete_all()
 
-customer_1 = Customer.new( {'name' => 'Ali', 'funds' => 8000} )
-customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 10000} )
-customer_3 = Customer.new( {'name' => 'Charlie', 'funds' => 6000} )
+customer_1 = Customer.new( {'name' => 'Ali', 'funds' => 8000, 'age' => 35} )
+customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 10000, 'age' => 14} )
+customer_3 = Customer.new( {'name' => 'Charlie', 'funds' => 6000, 'age' => 75} )
 customers = [customer_1, customer_2, customer_3]
 customers.each { |customer| customer.save() }
 
