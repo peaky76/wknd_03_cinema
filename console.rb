@@ -3,7 +3,9 @@ require('pry')
 require_relative('./models/customer')
 require_relative('./models/film')
 require_relative('./models/ticket')
+require_relative('./models/screen')
 
+Screen.delete_all()
 Ticket.delete_all()
 Customer.delete_all()
 Film.delete_all()
@@ -29,6 +31,15 @@ ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'film_id' => film_1.id} 
 tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5, ticket_6]
 tickets.each { |ticket| ticket.save() }
 tickets.each { |ticket| ticket.confirm_sale() }
+
+screen_1 = Screen.new( {'number' => 1, 'capacity' => 50} )
+screen_2 = Screen.new( {'number' => 2, 'capacity' => 30} )
+screen_3 = Screen.new( {'number' => 3, 'capacity' => 20} )
+screens = [screen_1, screen_2, screen_3]
+screens.each { |screen| screen.save() }
+
+screen_1.capacity = 60
+screen_1.update()
 
 binding.pry
 nil

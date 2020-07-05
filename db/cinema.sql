@@ -1,6 +1,14 @@
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS films;
+DROP TABLE IF EXISTS screens;
+
+
+CREATE TABLE screens (
+    id SERIAL PRIMARY KEY,
+    number INT,
+    capacity INT
+);
 
 CREATE TABLE films (
     id SERIAL PRIMARY KEY,
@@ -19,3 +27,5 @@ CREATE TABLE tickets (
     customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
     film_id INT REFERENCES films(id) ON DELETE CASCADE
 );
+
+
