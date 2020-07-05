@@ -13,7 +13,8 @@ CREATE TABLE screens (
 CREATE TABLE films (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
-    price VARCHAR(255)
+    price VARCHAR(255),
+    rating INT
 );
 
 CREATE TABLE customers (

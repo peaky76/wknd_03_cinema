@@ -3,30 +3,31 @@ require_relative('../db/sql_runner')
 class Film
 
     attr_reader :id
-    attr_accessor :title, :price
+    attr_accessor :title, :price, :rating
 
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @title = options['title']
         @price = options['price'].to_i()
+        @rating = options['rating'].to_i()
     end
 
     # CRUD fns
 
     def save()
-        sql = "INSERT INTO films (title, price) 
-        VALUES ($1, $2)
+        sql = "INSERT INTO films (title, price, rating) 
+        VALUES ($1, $2, $3)
         RETURNING id"
-        values = [@title, @price]
+        values = [@title, @price, @rating]
         result = SqlRunner.run(sql, values)
         @id = result.first['id'].to_i()
     end
     
     def update()
         sql = "UPDATE films
-        SET (title, price) = ($1, $2)
-        WHERE id = $3"
-        values = [@title, @price, @id]
+        SET (title, price, rating) = ($1, $2, $3)
+        WHERE id = $4"
+        values = [@title, @price, @rating, @id]
         SqlRunner.run(sql, values)
     end
 

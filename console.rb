@@ -13,14 +13,14 @@ Customer.delete_all()
 Film.delete_all()
 
 customer_1 = Customer.new( {'name' => 'Ali', 'funds' => 8000, 'age' => 35} )
-customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 10000, 'age' => 14} )
+customer_2 = Customer.new( {'name' => 'Bobbie', 'funds' => 10000, 'age' => 16} )
 customer_3 = Customer.new( {'name' => 'Charlie', 'funds' => 6000, 'age' => 75} )
 customers = [customer_1, customer_2, customer_3]
 customers.each { |customer| customer.save() }
 
-film_1 = Film.new( {'title' => 'The Godmother Part III', 'price' => 900} )
-film_2 = Film.new( {'title' => 'Badfellas', 'price' => 800} )
-film_3 = Film.new( {'title' => 'The Good, The Bad and The Average-Looking', 'price' => 1200} )
+film_1 = Film.new( {'title' => 'The Godmother Part III', 'price' => 900, 'rating' => 18} )
+film_2 = Film.new( {'title' => 'Badfellas', 'price' => 800, 'rating' => 18} )
+film_3 = Film.new( {'title' => 'The Good, The Bad and The Average-Looking', 'price' => 1200, 'rating' => 15} )
 films = [film_1, film_2, film_3]
 films.each { |film| film.save() }
 
