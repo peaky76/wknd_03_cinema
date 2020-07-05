@@ -73,7 +73,19 @@ class Ticket
 
     # Ticket transactions
 
+    def concession()
+        concession = 0
+        # Apply discount if the customer qualifies for a concession
+        sql = "SELECT age FROM customers
+        WHERE id = $1"
+        values = [@customer_id]
+        customer_age = SqlRunner.run(sql, values)[0]['age'].to_i()
+        concession = 200 if customer_age < 18 || customer_age > 65
+        return concession
+    end
+
     def off_peak_discount()
+        discount = 0
         # Apply discount if the screening is a matinee 
         sql = "SELECT * FROM screenings
         WHERE id = $1"
@@ -91,7 +103,7 @@ class Ticket
         WHERE screenings.id = $1"
         values = [@screening_id]
         base_price = SqlRunner.run(sql, values)[0]['price'].to_i()
-        return base_price - self.off_peak_discount
+        return base_price - self.off_peak_discount - self.concession
     end
 
     def confirm_sale()

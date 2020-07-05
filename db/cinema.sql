@@ -19,7 +19,8 @@ CREATE TABLE films (
 CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    funds INT
+    funds INT,
+    age INT
 );
 
 CREATE TABLE screenings (
