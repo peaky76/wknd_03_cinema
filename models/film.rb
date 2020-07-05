@@ -84,7 +84,7 @@ class Film
     end
 
     # def most_popular_screening()
-
+    #     return self.screenings().max_by { |screening| screening.
     # end
 
 end

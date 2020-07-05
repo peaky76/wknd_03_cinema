@@ -49,4 +49,12 @@ class Screening
         SqlRunner.run(sql)
     end
 
+    def sales_count()
+        sql = "SELECT COUNT(*) FROM tickets
+        WHERE screening_id = $1"
+        values = [@id]
+        result = SqlRunner.run(sql, values).first()['count']
+        return result
+    end
+
 end
