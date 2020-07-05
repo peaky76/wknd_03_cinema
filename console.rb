@@ -52,7 +52,7 @@ ticket_3 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screen
 ticket_4 = Ticket.new( {'customer_id' => customer_2.id, 'screening_id' => screening_2.id} )
 ticket_5 = Ticket.new( {'customer_id' => customer_2.id, 'screening_id' => screening_5.id} )
 ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'screening_id' => screening_3.id} )
-ticket_7 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screening_6.id} )
+ticket_7 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screening_3.id} )
 tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5, ticket_6, ticket_7]
 tickets.each { |ticket| ticket.save() }
 # tickets.each { |ticket| ticket.confirm_sale() }

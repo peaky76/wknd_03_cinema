@@ -57,4 +57,8 @@ class Screening
         return result
     end
 
+    def is_matinee?()
+        return @date_time.hour < 17
+    end
+
 end

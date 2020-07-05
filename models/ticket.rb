@@ -72,13 +72,13 @@ class Ticket
 
     # Ticket transactions
 
-    # def price()
-    #     sql = "SELECT price FROM films
-    #     WHERE id = $1"
-    #     values = [@film_id]
-    #     result = SqlRunner.run(sql, values).first()
-    #     return result['price'].to_i()
-    # end
+    def price()
+        sql = "SELECT price FROM films
+        WHERE id = $1"
+        values = [@film_id]
+        result = SqlRunner.run(sql, values).first()
+        return result['price'].to_i()
+    end
 
     # def confirm_sale()
     #     sql = "UPDATE customers 
