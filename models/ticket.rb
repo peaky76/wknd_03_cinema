@@ -8,25 +8,25 @@ class Ticket
     def initialize(options)
         @id = options['id'].to_i() if options['id']
         @customer_id = options['customer_id'].to_i()
-        @film_id = options['film_id'].to_i()
+        @screening_id = options['screening_id'].to_i()
     end
 
     # CRUD fns
 
     def save()
-        sql = "INSERT INTO tickets (customer_id, film_id)
+        sql = "INSERT INTO tickets (customer_id, screening_id)
         VALUES ($1, $2)
         RETURNING id"
-        values = [@customer_id, @film_id]
+        values = [@customer_id, @screening_id]
         result = SqlRunner.run(sql, values).first()
         @id = result['id'].to_i()
     end
 
     def update()
         sql = "UPDATE tickets
-        SET (customer_id, film_id) = ($1, $2)
+        SET (customer_id, screening_id) = ($1, $2)
         WHERE id = $3"
-        values = [@customer_id, @film_id, @id]
+        values = [@customer_id, @screening_id, @id]
         SqlRunner.run(sql, values)
     end
 
@@ -48,22 +48,35 @@ class Ticket
         SqlRunner.run(sql)
     end
 
+    # Ticket info
+
+    def film()
+        # Get which film this ticket is for via screenings table
+        sql = "SELECT films.* FROM films
+        INNER JOIN screenings
+        ON screenings.film_id = films.id
+        WHERE screenings.id = $1"
+        values = [@screening_id]
+        film_data = SqlRunner.run(sql, values)
+        return film_data.map { |film| Film.new(film) }  
+    end
+
     # Ticket transactions
 
-    def price()
-        sql = "SELECT price FROM films
-        WHERE id = $1"
-        values = [@film_id]
-        result = SqlRunner.run(sql, values).first()
-        return result['price'].to_i()
-    end
+    # def price()
+    #     sql = "SELECT price FROM films
+    #     WHERE id = $1"
+    #     values = [@film_id]
+    #     result = SqlRunner.run(sql, values).first()
+    #     return result['price'].to_i()
+    # end
 
-    def confirm_sale()
-        sql = "UPDATE customers 
-        SET funds = funds - $1
-        WHERE id = $2"
-        values = [self.price(), @customer_id]
-        SqlRunner.run(sql, values)
-    end
+    # def confirm_sale()
+    #     sql = "UPDATE customers 
+    #     SET funds = funds - $1
+    #     WHERE id = $2"
+    #     values = [self.price(), @customer_id]
+    #     SqlRunner.run(sql, values)
+    # end
 
 end

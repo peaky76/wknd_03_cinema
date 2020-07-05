@@ -32,7 +32,7 @@ CREATE TABLE screenings (
 CREATE TABLE tickets (
     id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
-    film_id INT REFERENCES films(id) ON DELETE CASCADE
+    screening_id INT REFERENCES screenings(id) ON DELETE CASCADE
 );
 
 

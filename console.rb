@@ -46,15 +46,15 @@ screenings.each { |screening| screening.save() }
 screening_6.screen_id = screen_3.id
 screening_6.update()
 
-ticket_1 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_1.id} )
-ticket_2 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_2.id} )
-ticket_3 = Ticket.new( {'customer_id' => customer_1.id, 'film_id' => film_3.id} )
-ticket_4 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_1.id} )
-ticket_5 = Ticket.new( {'customer_id' => customer_2.id, 'film_id' => film_2.id} )
-ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'film_id' => film_1.id} )
+ticket_1 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screening_1.id} )
+ticket_2 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screening_4.id} )
+ticket_3 = Ticket.new( {'customer_id' => customer_1.id, 'screening_id' => screening_6.id} )
+ticket_4 = Ticket.new( {'customer_id' => customer_2.id, 'screening_id' => screening_2.id} )
+ticket_5 = Ticket.new( {'customer_id' => customer_2.id, 'screening_id' => screening_5.id} )
+ticket_6 = Ticket.new( {'customer_id' => customer_3.id, 'screening_id' => screening_3.id} )
 tickets = [ticket_1, ticket_2, ticket_3, ticket_4, ticket_5, ticket_6]
 tickets.each { |ticket| ticket.save() }
-tickets.each { |ticket| ticket.confirm_sale() }
+# tickets.each { |ticket| ticket.confirm_sale() }
 
 binding.pry
 nil
