@@ -63,9 +63,11 @@ class Film
         return customers
     end
 
-    def sales_count()
+    def total_sales_count()
         sql = "SELECT COUNT(*) FROM tickets
-        WHERE film_id = $1"
+        INNER JOIN screenings
+        ON tickets.screening_id = screenings.id
+        WHERE screenings.film_id = $1"
         values = [@id]
         result = SqlRunner.run(sql, values).first()['count']
         return result
