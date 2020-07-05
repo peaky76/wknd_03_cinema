@@ -58,34 +58,48 @@ class Ticket
         WHERE screenings.id = $1"
         values = [@screening_id]
         film_data = SqlRunner.run(sql, values)
-        return film_data.map { |film| Film.new(film) }  
+        film = film_data.map { |film| Film.new(film) }
+        return film  
     end
 
-    def time()
+    def date_time()
         # Get time of screening for this ticket via screenings table
         sql = "SELECT date_time FROM screenings
         WHERE id = $1"
         values = [@screening_id]
-        time_data = SqlRunner.run(sql, values).first
-        return time_data['date_time'] 
+        screening = SqlRunner.run(sql, values)[0]
+        return screening['date_time'] 
     end
 
     # Ticket transactions
 
-    def price()
-        sql = "SELECT price FROM films
+    def off_peak_discount()
+        # Apply discount if the screening is a matinee 
+        sql = "SELECT * FROM screenings
         WHERE id = $1"
-        values = [@film_id]
-        result = SqlRunner.run(sql, values).first()
-        return result['price'].to_i()
+        values = [@screening_id]
+        screening_data = SqlRunner.run(sql, values)
+        screening = screening_data.map { |screening| Screening.new(screening) }
+        discount = 150 if screening[0].is_matinee?
+        return discount
     end
 
-    # def confirm_sale()
-    #     sql = "UPDATE customers 
-    #     SET funds = funds - $1
-    #     WHERE id = $2"
-    #     values = [self.price(), @customer_id]
-    #     SqlRunner.run(sql, values)
-    # end
+    def price()
+        sql = "SELECT price FROM films
+        INNER JOIN screenings
+        ON screenings.film_id = films.id
+        WHERE screenings.id = $1"
+        values = [@screening_id]
+        base_price = SqlRunner.run(sql, values)[0]['price'].to_i()
+        return base_price - self.off_peak_discount
+    end
+
+    def confirm_sale()
+        sql = "UPDATE customers 
+        SET funds = funds - $1
+        WHERE id = $2"
+        values = [self.price(), @customer_id]
+        SqlRunner.run(sql, values)
+    end
 
 end

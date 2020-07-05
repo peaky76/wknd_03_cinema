@@ -9,7 +9,7 @@ class Screening
         @id = options['id'].to_i() if options['id']
         @film_id = options['film_id'].to_i()
         @screen_id = options['screen_id'].to_i()
-        @date_time = options['date_time']
+        @date_time = DateTime.strptime(options['date_time'], '%Y-%m-%d %H:%M')
     end
 
     # CRUD fns
@@ -58,7 +58,7 @@ class Screening
     end
 
     def is_matinee?()
-        return @date_time.hour < 17
+        return @date_time.hour <= 17
     end
 
 end

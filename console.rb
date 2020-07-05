@@ -1,5 +1,4 @@
 require('pry')
-require('date')
 
 require_relative('./models/customer')
 require_relative('./models/film')
@@ -34,12 +33,12 @@ screens.each { |screen| screen.save() }
 screen_1.capacity = 60
 screen_1.update()
 
-screening_1 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_3.id, 'date_time' => DateTime.new(2020,8,1,13,0)} )
-screening_2 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_2.id, 'date_time' => DateTime.new(2020,8,1,16,0)} ) 
-screening_3 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_1.id, 'date_time' => DateTime.new(2020,8,1,19,0)} )
-screening_4 = Screening.new( {'film_id' => film_2.id, 'screen_id' => screen_3.id, 'date_time' => DateTime.new(2020,8,1,15,30)} )
-screening_5 = Screening.new( {'film_id' => film_2.id, 'screen_id' => screen_2.id, 'date_time' => DateTime.new(2020,8,1,18,30)} )
-screening_6 = Screening.new( {'film_id' => film_3.id, 'screen_id' => screen_2.id, 'date_time' => DateTime.new(2020,8,1,19,30)} )
+screening_1 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_3.id, 'date_time' => '2020-08-01 13:00'} )
+screening_2 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_2.id, 'date_time' => '2020-08-01 16:00'} ) 
+screening_3 = Screening.new( {'film_id' => film_1.id, 'screen_id' => screen_1.id, 'date_time' => '2020-08-01 19:00'} )
+screening_4 = Screening.new( {'film_id' => film_2.id, 'screen_id' => screen_3.id, 'date_time' => '2020-08-01 15:30'} )
+screening_5 = Screening.new( {'film_id' => film_2.id, 'screen_id' => screen_2.id, 'date_time' => '2020-08-01 18:30'} )
+screening_6 = Screening.new( {'film_id' => film_3.id, 'screen_id' => screen_2.id, 'date_time' => '2020-08-01 19:30'} )
 screenings = [screening_1, screening_2, screening_3, screening_4, screening_5, screening_6]
 screenings.each { |screening| screening.save() }
 
