@@ -59,7 +59,7 @@ class Ticket
         values = [@screening_id]
         film_data = SqlRunner.run(sql, values)
         film = film_data.map { |film| Film.new(film) }
-        return film  
+        return film.first  
     end
 
     def date_time()
@@ -71,16 +71,25 @@ class Ticket
         return screening['date_time'] 
     end
 
-    # Ticket transactions
-
-    def concession()
-        concession = 0
-        # Apply discount if the customer qualifies for a concession
+    def customer_age()
         sql = "SELECT age FROM customers
         WHERE id = $1"
         values = [@customer_id]
         customer_age = SqlRunner.run(sql, values)[0]['age'].to_i()
-        concession = 200 if customer_age < 18 || customer_age > 65
+        return customer_age
+    end
+
+    # Ticket transactions
+
+    def id_check_passed?()
+        # Check customer age vs film rating to see if ticket can be sold to them
+        return self.customer_age > self.film.rating
+    end
+
+    def concession()
+        concession = 0
+        # Apply discount if the customer qualifies for a concession
+        concession = 200 if self.customer_age < 18 || self.customer_age > 65
         return concession
     end
 
