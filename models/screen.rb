@@ -39,8 +39,8 @@ class Screen
 
     def self.all()
         sql = "SELECT * FROM screens"
-        films = SqlRunner.run(sql)
-        return films.map { |film| Film.new(film) }
+        screens = SqlRunner.run(sql)
+        return screens.map { |screen| Screen.new(screen) }
     end
 
     def self.delete_all()
