@@ -61,6 +61,15 @@ class Ticket
         return film_data.map { |film| Film.new(film) }  
     end
 
+    def time()
+        # Get time of screening for this ticket via screenings table
+        sql = "SELECT date_time FROM screenings
+        WHERE id = $1"
+        values = [@screening_id]
+        time_data = SqlRunner.run(sql, values).first
+        return time_data['date_time'] 
+    end
+
     # Ticket transactions
 
     # def price()
